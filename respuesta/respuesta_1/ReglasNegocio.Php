@@ -1,5 +1,5 @@
 <?php
-
+namespace prueba_tecnica_romeu\respuesta\respuesta1\ReglasNegocio;
 class ReglasNegocio {
     // Constructor: método que se ejecuta al crear un objeto
     public function __construct($sku, $nombre, $precio, $etiquetas = []) {

@@ -5,11 +5,13 @@ class Cupones {
     public $name;
     public $start_date;
     public $finish_date;
+    public $acumulative // bool
 
-    public function __construct($name,$start_date, $finish_date) {
+    public function __construct($name,$start_date, $finish_date, $acumulative = true) {
         $this->name = $name;
         $this->start_date = $start_date;
         $this->finish_date = $finish_date;
+        $this->acumulative = $acumulative;
     }
 
     // Como añadir reglas de negocio? 
