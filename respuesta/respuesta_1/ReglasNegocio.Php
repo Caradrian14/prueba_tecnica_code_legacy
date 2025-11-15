@@ -1,25 +1,24 @@
 <?php
 
 class ReglasNegocio {
-    public $sku;
-    public $nombre;
-    public $precio;
-    public $etiquetas;
-
     // Constructor: método que se ejecuta al crear un objeto
     public function __construct($sku, $nombre, $precio, $etiquetas = []) {
-        $this->sku = $sku;
-        $this->nombre = $nombre;
-        $this->precio = $precio;
-        $this->etiquetas = $etiquetas;
+    
     }
 
-    // Método para calcular descuento BOGO
-    public function calcularDescuentoBOGO($cantidad) {
-        if (in_array('BOGO', $this->etiquetas)) {
-            $itemsGratis = floor($cantidad / 2);
-            return $itemsGratis * $this->precio;
-        }
-        return 0;
+    public function regla_bogo() {
+        return false;
+    }
+
+    public function regla_descuento_por_volumen() {
+        return false;
+    }
+
+    public function regla_cupones() {
+        return false;
+    }
+
+    public function regla_costes_envio() {
+        return false;
     }
 }
