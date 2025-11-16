@@ -9,7 +9,6 @@ class Calculadora {
     public function __construct($carrito, $cupones) {
         $this->carrito = $carrito;
         $this->cupones = $cupones;
-        $this->inicio_carrito();
     }
 
 
@@ -21,8 +20,8 @@ class Calculadora {
         $bogo_discount = 0;  // Descuento acumulado por BOGO
 
         //Obtenemos los datos de la bbdd
-        $PRODUCTOS_DB = require_once __DIR__ . "/../../datos/productos.php";
-
+        $PRODUCTOS_DB = require __DIR__ . "/../../datos/productos.php";
+        
         //1. Calcular subtotal bruto
         foreach ($this->carrito as $item) {
             $sku = $item['sku'];
@@ -41,26 +40,26 @@ class Calculadora {
             $total_items += $quantity;
     
             // Aplicar regla BOGO usando la clase BogoRule
-            $bogo_discount += $bogoRule->regla_bogo($product_data, $quantity);
+            $bogo_discount += $this->regla_bogo($product_data, $quantity);
         }
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;
-
+        
         // 2. Aplicar Descuento por Volumen (Regla 2)
         $volume_discount = $this->regla_volumen($total_items, $subtotal_after_bogo);
 
         // Subtotal final (BOGO + Volumen)
         $final_subtotal = $subtotal_after_bogo - $volume_discount;
-        
+                
         // 3. Aplicar descuentos de cupones
         $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
 
          // 4. Calcular coste de envío
         $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
-
+        
         // Total final
         $total_price = $final_subtotal + $shipping_cost;
-    
+
         return round($total_price, 2);
     }
 
