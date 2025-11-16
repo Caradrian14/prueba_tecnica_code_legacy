@@ -25,7 +25,6 @@ $carrito2 = new Calculadora($cart2, $coupons2);
 $total2 = $carrito2->inicio_carrito();
 echo "Escenario 2 (Volumen): \t\t" . $total2 . " (Esperado: 13.10)\n <br>";
 
-
 $cart3 = [['sku' => 'PLT', 'quantity' => 4], ['sku' => 'MAN', 'quantity' => 2]];
 $coupons3 = [];
 $carrito3 = new Calculadora($cart3, $coupons3);
