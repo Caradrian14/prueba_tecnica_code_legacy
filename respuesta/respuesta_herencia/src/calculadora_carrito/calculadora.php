@@ -2,9 +2,6 @@
 
 namespace respuesta_herencia\src\calculadora_carrito;
 
-//Aqui ira logica del negocio 
-//como si fuera el "calculate_legacy_price" del script legalicy
-
 class Calculadora {
     private $carrito;
     private $cupones;
@@ -12,6 +9,7 @@ class Calculadora {
     public function __construct($carrito, $cupones) {
         $this->carrito = $carrito;
         $this->cupones = $cupones;
+        $this->inicio_carrito();
     }
 
 
@@ -23,8 +21,7 @@ class Calculadora {
         $bogo_discount = 0;  // Descuento acumulado por BOGO
 
         //Obtenemos los datos de la bbdd
-        $PRODUCTOS_DB = require __DIR__ . "/datos/productos.php";
-
+        $PRODUCTOS_DB = require_once __DIR__ . "/../../datos/productos.php";
 
         //1. Calcular subtotal bruto
         foreach ($this->carrito as $item) {
@@ -85,6 +82,7 @@ class Calculadora {
         return 0.0;
     }
 
+    //Aqui hay que aplicar los objetos cupones
     public function aplicar_descuentos_cupones(float $subtotal, array $cupones): float {
         $has_1euros_coupon = in_array('1EUROS', $cupones);
         $has_2euros_coupon = in_array('2EUROS', $cupones);
@@ -106,12 +104,12 @@ class Calculadora {
     }
 
     public function calcular_coste_envio(float $subtotal, array $cupones): float {
-    $has_freeshipping_coupon = in_array('FREESHIPPING', $cupones);
+        $has_freeshipping_coupon = in_array('FREESHIPPING', $cupones);
 
-    if ($subtotal >= 50.00) {
-        return 0.0; // Envío gratis por superar 50€
-    } else {
-        return $has_freeshipping_coupon ? 0.0 : 5.00; // Envío estándar si no hay cupón
+        if ($subtotal >= 50.00) {
+            return 0.0; // Envío gratis por superar 50€
+        } else {
+            return $has_freeshipping_coupon ? 0.0 : 5.00; // Envío estándar si no hay cupón
+        }
     }
-}
 }
