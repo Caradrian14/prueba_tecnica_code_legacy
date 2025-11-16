@@ -55,25 +55,16 @@ class Calculadora {
         // Subtotal final (BOGO + Volumen)
         $final_subtotal = $subtotal_after_bogo - $volume_discount;
         
-        //------------Logica cupones------------
-        $has_1euros_coupon = in_array('1EUROS', $coupons);
-        $has_2euros_coupon = in_array('2EUROS', $coupons);
-        $has_10euros_coupon = in_array('10EUROS', $coupons);
-        $has_blackfriday_coupon = in_array('BLACKFRIDAY', $coupons);
+        // 3. Aplicar descuentos de cupones
+        $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
 
-        if($has_1euros_coupon){
-            $final_subtotal -= 1.00;
-        } else if($has_2euros_coupon){
-            $final_subtotal -= 2.00;
-        } else if($has_10euros_coupon){
-            $final_subtotal -= 10.00;
-        } else if($has_blackfriday_coupon && date('Y-m-d') >= '2025-11-20' && date('Y-m-d') <= '2025-11-30'){
-            // Aplicar 20% de descuento adicional en Black Friday
-            $final_subtotal *= 0.80;
-        }
-        //------------Fin Logica cupones------------
+         // 4. Calcular coste de envío
+        $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
 
-        return false;
+        // Total final
+        $total_price = $final_subtotal + $shipping_cost;
+    
+        return round($total_price, 2);
     }
 
     function regla_bogo(array $producto, int $quantity): float {
@@ -93,4 +84,34 @@ class Calculadora {
 
         return 0.0;
     }
+
+    public function aplicar_descuentos_cupones(float $subtotal, array $cupones): float {
+        $has_1euros_coupon = in_array('1EUROS', $cupones);
+        $has_2euros_coupon = in_array('2EUROS', $cupones);
+        $has_10euros_coupon = in_array('10EUROS', $cupones);
+        $has_blackfriday_coupon = in_array('BLACKFRIDAY', $cupones);
+
+        if ($has_1euros_coupon) {
+            $subtotal -= 1.00;
+        } else if ($has_2euros_coupon) {
+            $subtotal -= 2.00;
+        } else if ($has_10euros_coupon) {
+            $subtotal -= 10.00;
+        } else if ($has_blackfriday_coupon && date('Y-m-d') >= '2025-11-20' && date('Y-m-d') <= '2025-11-30') {
+            // Aplicar 20% de descuento adicional en Black Friday
+            $subtotal *= 0.80;
+        }
+
+        return $subtotal;
+    }
+
+    public function calcular_coste_envio(float $subtotal, array $cupones): float {
+    $has_freeshipping_coupon = in_array('FREESHIPPING', $cupones);
+
+    if ($subtotal >= 50.00) {
+        return 0.0; // Envío gratis por superar 50€
+    } else {
+        return $has_freeshipping_coupon ? 0.0 : 5.00; // Envío estándar si no hay cupón
+    }
+}
 }
