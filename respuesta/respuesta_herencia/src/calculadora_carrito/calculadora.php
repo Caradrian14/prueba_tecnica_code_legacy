@@ -44,19 +44,18 @@ class Calculadora {
         }
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;
-        
         // 2. Aplicar Descuento por Volumen (Regla 2)
-        $volume_discount = $this->regla_volumen($total_items, $subtotal_after_bogo);
+        $volume_discount = $this->regla_volumen($total_items, $raw_subtotal);
 
         // Subtotal final (BOGO + Volumen)
         $final_subtotal = $subtotal_after_bogo - $volume_discount;
-                
+
         // 3. Aplicar descuentos de cupones
         $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
 
          // 4. Calcular coste de envío
         $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
-        
+
         // Total final
         $total_price = $final_subtotal + $shipping_cost;
 
@@ -71,11 +70,11 @@ class Calculadora {
         return 0.0;
     }
 
-    public function regla_volumen(int $total_items, float $subtotal_after_bogo): float
+    public function regla_volumen(int $total_items, float $raw_subtotal): float
     {
         // Regla: Si hay 5 o más items, se aplica 10% de descuento
         if ($total_items >= 5) {
-            return $subtotal_after_bogo * 0.10; // descuento correcto
+            return $raw_subtotal * 0.10; // descuento correcto
         }
 
         return 0.0;
