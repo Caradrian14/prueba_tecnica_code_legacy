@@ -23,8 +23,7 @@ $COUPONS = [
     '2EUROS' => ['2025-01-01', '2025-12-31'],
     '10EUROS' => ['2025-01-01', '2025-12-31'],
 ];
-echo $COUPONS['FREESHIPPING'][0];
-exit;
+
 /**
 * Función principal que calcula el precio total del carrito.
 * Contiene toda la lógica de negocio mezclada.

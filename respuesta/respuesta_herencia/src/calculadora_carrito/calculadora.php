@@ -3,13 +3,13 @@
 namespace respuesta_herencia\src\calculadora_carrito;
 use respuesta_herencia\src\productos\Producto;
 use respuesta_herencia\src\cupones\Cupon;
+use Datetime;
+
 class Calculadora {
     private $carrito;
     private $cupones;
 
     public function __construct($carrito, $cupones) {
-        // $this->carrito = $carrito;
-        // $this->cupones = $cupones;
         $this->creacion_objetos($carrito, $cupones);
     }
     // Pasar a un fctory?
@@ -127,6 +127,17 @@ class Calculadora {
 
     public function aplicar_descuentos_cupones(float $subtotal, $cupones): float {
         foreach ($cupones as $cupon) {
+            //----comprobamos las fechas----
+            $start_coupon = $cupon->getStartDate();
+            $finish_coupon = $cupon->getFinishDate();
+            $start_coupon_date = new DateTime($start_coupon);
+            $finish_coupon_date = new DateTime($finish_coupon);
+            $today = new DateTime();
+            if ($today < $start_coupon_date || $today > $finish_coupon_date) {
+                continue;
+            }
+            //----Fin comprobamos las fechas----
+            
             $nombre_cupon = $cupon->getName();
             $has_freeshipping_coupon = false;
             //Se podria haber hecho con un caso de array, pero mejor switch case (?)
