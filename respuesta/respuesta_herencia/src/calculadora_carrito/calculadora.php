@@ -94,7 +94,9 @@ class Calculadora {
         $final_subtotal = $subtotal_after_bogo - $volume_discount;
 
         // 3. Aplicar descuentos de cupones
-        $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
+        if($this->cupones != NULL){
+            $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
+        }
 
          // 4. Calcular coste de envío
         $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
@@ -124,7 +126,7 @@ class Calculadora {
     }
 
     //----REFCTORIZAR CUPONES----
-    public function aplicar_descuentos_cupones(float $subtotal, array $cupones): float {
+    public function aplicar_descuentos_cupones2(float $subtotal, array $cupones): float {
         $has_1euros_coupon = in_array('1EUROS', $cupones);
         $has_2euros_coupon = in_array('2EUROS', $cupones);
         $has_10euros_coupon = in_array('10EUROS', $cupones);
@@ -144,9 +146,43 @@ class Calculadora {
         return $subtotal;
     }
 
-    public function calcular_coste_envio(float $subtotal, array $cupones): float {
-        $has_freeshipping_coupon = in_array('FREESHIPPING', $cupones);
 
+    public function aplicar_descuentos_cupones(float $subtotal, $cupones): float {
+        foreach ($cupones as $cupon) {
+            $nombre_cupon = $cupon->getName();
+            $has_freeshipping_coupon = false;
+            //Se podria haber hecho con un caso de array, pero mejor switch case (?)
+            switch ($nombre_cupon) {
+                case "1EUROS":
+                    //llamada a funciones de cada hijo cupon?
+                    $final_subtotal -= 1.00;
+                    break;
+                case "2EUROS":
+                    $final_subtotal -= 2.00;
+                    break;
+                case "10EUROS":
+                    $final_subtotal -= 10.00;
+                    break;
+                case "BLACKFRIDAY":
+                    $final_subtotal *= 0.80;
+                    break;
+            }
+        }
+        return $subtotal;
+    }
+
+
+    public function calcular_coste_envio(float $subtotal, $cupones): float {
+        // Poner en otra funcion
+        $has_freeshipping_coupon = false;
+        if($cupones != NULL) {
+            foreach ($cupones as $cupon) {
+                if($cupon->getName() == "FREESHIPPING") {
+                    $has_freeshipping_coupon = true;
+                }
+            }
+        }
+        
         if ($subtotal >= 50.00) {
             return 0.0; // Envío gratis por superar 50€
         } else {
