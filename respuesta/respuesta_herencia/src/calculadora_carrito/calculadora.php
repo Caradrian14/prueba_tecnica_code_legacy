@@ -12,7 +12,7 @@ class Calculadora {
         // $this->cupones = $cupones;
         $this->creacion_objetos($carrito, $cupones);
     }
-
+    // Pasar a un fctory?
     public function creacion_objetos($carrito, $cupones) {
         // Usamos el array a modoo de bbdd pero aqui habria que hacer una consulta select where a la bbdd 
         $PRODUCTOS_DB = require __DIR__ . "/../../datos/productos.php";
@@ -23,13 +23,15 @@ class Calculadora {
             }
 
             $sku = $item_carrito['sku'];
-            $name  = $data['name']  ?? '';
-            $price = $data['price'] ?? 0;
-            $tag   = $data['tag']   ?? [];
+            $name  = $PRODUCTOS_DB[$sku]['name']  ?? '';
+            $quantity  = $item_carrito['quantity']  ?? '';
+            $price = $PRODUCTOS_DB[$sku]['price'] ?? 0;
+            $tag   = $PRODUCTOS_DB[$sku]['tag']   ?? [];
             // Asignar los valores correspondientes del array a su variable
             $producto_carrito = new Producto(
                 sku:   $sku,
                 name:  $name,
+                quantity: $quantity,
                 price: $price,
                 tag:   $tag
             );
@@ -66,9 +68,8 @@ class Calculadora {
 
         //1. Calcular subtotal bruto
         foreach ($this->carrito as $item) {
-            $sku = $item['sku'];
-            $quantity = $item['quantity'];
-            
+            $sku = $item->getSku();
+            $quantity = $item->getQuantity();
             //Hay que comprobar que los productos existan ( esto seria un select where en la bbdd)
             if (!isset($PRODUCTOS_DB[$sku])) {
                 continue; // Ignorar productos que no existen

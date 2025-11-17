@@ -4,12 +4,14 @@ namespace respuesta_herencia\src\productos;
 class Producto {
     public $sku;
     public $name;
+    public $quantity;
     public $price;
     public $tag;
 
-    public function __construct($sku, $name, $price, $tag = []) {
+    public function __construct($sku, $name, $quantity, $price, $tag = []) {
         $this->sku = $sku;
         $this->name = $name;
+        $this->quantity = $quantity;
         $this->price = $price;
         $this->tag = $tag;
     }
@@ -34,6 +36,15 @@ class Producto {
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    //$quantity
+    public function getQuantity() {
+        return $this->quantity;
+    }
+
+    public function setQuantity($quantity) {
+        $this->quantity = $quantity;
     }
 
     //$price
