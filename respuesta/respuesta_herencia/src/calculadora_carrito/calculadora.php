@@ -2,7 +2,7 @@
 
 namespace respuesta_herencia\src\calculadora_carrito;
 use respuesta_herencia\src\productos\Producto;
-use Cupon;
+use respuesta_herencia\src\cupones\Cupon;
 class Calculadora {
     private $carrito;
     private $cupones;
@@ -52,9 +52,6 @@ class Calculadora {
             );
             $this->cupones[] = $cupones_carrito;
         }
-        var_dump($this->cupones) . "<br>";
-        var_dump($this->carrito) . "<br>";
-        exit();
     }
 
     // Vamos a empezar con que las reglas de negocio son funciones, una vez ya funcional las pasamos a objetos.
