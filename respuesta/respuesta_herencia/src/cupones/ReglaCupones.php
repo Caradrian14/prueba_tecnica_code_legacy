@@ -2,9 +2,7 @@
 namespace respuesta_herencia\src\Rules;
 use Datetime;
 use respuesta_herencia\src\cupones\CuponDescuento1Euro;
-use respuesta_herencia\src\cupones\CuponDescuento2Euro;
-use respuesta_herencia\src\cupones\CuponDescuento10Euro;
-use respuesta_herencia\src\cupones\CuponDescuentoBlackFriday;
+
 class ReglaCupones {
     public static function aplicar_descuentos_cupones(float $final_subtotal, $cupones): float {
         //la idea es hacer un cupon que sea no acumulable. Hay que encontrar ese cupon
@@ -40,16 +38,13 @@ class ReglaCupones {
                     $final_subtotal = CuponDescuento1Euro::calculo_cupon_descuento_1euro($final_subtotal);
                     break;
                 case "2EUROS":
-                    $final_subtotal = CuponDescuento2Euro::calculo_cupon_descuento_2euro($final_subtotal);
-                    // $final_subtotal -= 2.00;
+                    $final_subtotal -= 2.00;
                     break;
                 case "10EUROS":
-                    // $final_subtotal -= 10.00;
-                    $final_subtotal = CuponDescuento10Euro::calculo_cupon_descuento_10euro($final_subtotal);
+                    $final_subtotal -= 10.00;
                     break;
                 case "BLACKFRIDAY":
                     $final_subtotal *= 0.80;
-                    $final_subtotal = CuponDescuentoBlackFriday::calculo_cupon_descuento_blackfriday($final_subtotal);
                     break;
             }
         }

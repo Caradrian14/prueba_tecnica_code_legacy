@@ -7,7 +7,6 @@ $COUPONS = require __DIR__ . "/datos/cupones.php";
 //ahora pasariamos a la logica de negocio
 require __DIR__ . '/src/Cupones/Cupon.php';
 require __DIR__ . '/src/Productos/Producto.php';
-require __DIR__ . '/src/Cupones/CuponDescuento1Euro.php';
 require __DIR__ . '/src/Calculadora_carrito/CalculadoraCarrito.php';
 require_once __DIR__ . '/src/Factory/ProductoFactory.php';
 require_once __DIR__ . '/src/Factory/CuponFactory.php';
@@ -15,7 +14,10 @@ require_once __DIR__ . '/src/Rules\ReglaBogo.php';
 require_once __DIR__ . '/src/Rules\ReglaDescuentoVolumen.php';
 require_once __DIR__ . '/src/Rules\ReglaCostesEnvio.php';
 require_once __DIR__ . '/src/Rules\ReglaCupones.php';
-
+require_once __DIR__ . '/src/Cupones\CuponDescuento1Euro.php';
+require_once __DIR__ . '/src/Cupones\CuponDescuento2Euro.php';
+require_once __DIR__ . '/src/Cupones\CuponDescuento10Euro.php';
+require_once __DIR__ . '/src/Cupones\CuponDescuentoBlackFriday.php';
 use respuesta_herencia\src\Calculadora_carrito\Calculadora;
 
 //creamos el carrito y agregamos el producto de la prueba
