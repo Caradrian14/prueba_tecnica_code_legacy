@@ -12,7 +12,7 @@ require __DIR__ . '/src/Calculadora_carrito/CalculadoraCarrito.php';
 require_once __DIR__ . '/src/Factory/ProductoFactory.php';
 require_once __DIR__ . '/src/Factory/CuponFactory.php';
 require_once __DIR__ . '/src/Rules\ReglaBogo.php';
-//y demas require
+require_once __DIR__ . '/src/Rules\ReglaDescuentoVolumen.php';
 
 use respuesta_herencia\src\Calculadora_carrito\Calculadora;
 

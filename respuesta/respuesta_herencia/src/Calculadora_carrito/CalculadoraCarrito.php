@@ -7,6 +7,7 @@ use Datetime;
 use respuesta_herencia\src\Factory\ProductoFactory;
 use respuesta_herencia\src\Factory\CuponFactory;
 use respuesta_herencia\src\Rules\ReglaBogo;
+use respuesta_herencia\src\Rules\ReglaDescuentoVolumen;
 
 class Calculadora {
     private $carrito;
@@ -87,7 +88,9 @@ class Calculadora {
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;
         // 2. Aplicar Descuento por Volumen (Regla 2)
-        $volume_discount = $this->regla_volumen($total_items, $raw_subtotal);
+        // $volume_discount = $this->regla_volumen($total_items, $raw_subtotal);
+        $volume_discount = ReglaDescuentoVolumen::regla_volumen($total_items, $raw_subtotal);
+
 
         // Subtotal final (BOGO + Volumen)
         $final_subtotal = $subtotal_after_bogo - $volume_discount;
@@ -106,21 +109,11 @@ class Calculadora {
         return round($total_price, 2);
     }
 
-    function regla_bogo(array $producto, int $quantity): float {
-        var_dump($producto);
-        exit();
-        if (in_array('BOGO', $producto['tags'])) {
-            $free_items = floor($quantity / 2);
-            return $free_items * $producto['price'];
-        }
-        return 0.0;
-    }
-
     public function regla_volumen(int $total_items, float $raw_subtotal): float
     {
         // Regla: Si hay 5 o más items, se aplica 10% de descuento
         if ($total_items >= 5) {
-            return $raw_subtotal * 0.10; // descuento correcto
+            return $raw_subtotal * 0.10;
         }
 
         return 0.0;
