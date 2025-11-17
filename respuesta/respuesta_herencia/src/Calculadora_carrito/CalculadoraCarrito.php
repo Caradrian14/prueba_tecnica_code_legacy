@@ -6,6 +6,7 @@ use respuesta_herencia\src\cupones\Cupon;
 use Datetime;
 use respuesta_herencia\src\Factory\ProductoFactory;
 use respuesta_herencia\src\Factory\CuponFactory;
+use respuesta_herencia\src\Rules\ReglaBogo;
 
 class Calculadora {
     private $carrito;
@@ -78,7 +79,10 @@ class Calculadora {
             $total_items += $quantity;
     
             // Aplicar regla BOGO usando la clase BogoRule
-            $bogo_discount += $this->regla_bogo($product_data, $quantity);
+            $bogo_discount += ReglaBogo::regla_bogo($product_data, $quantity);
+
+            // $bogo_discount += $this->regla_bogo($product_data, $quantity);
+
         }
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;
@@ -103,6 +107,8 @@ class Calculadora {
     }
 
     function regla_bogo(array $producto, int $quantity): float {
+        var_dump($producto);
+        exit();
         if (in_array('BOGO', $producto['tags'])) {
             $free_items = floor($quantity / 2);
             return $free_items * $producto['price'];
