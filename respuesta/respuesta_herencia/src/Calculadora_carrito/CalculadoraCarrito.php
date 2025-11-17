@@ -8,6 +8,7 @@ use respuesta_herencia\src\Factory\ProductoFactory;
 use respuesta_herencia\src\Factory\CuponFactory;
 use respuesta_herencia\src\Rules\ReglaBogo;
 use respuesta_herencia\src\Rules\ReglaDescuentoVolumen;
+use respuesta_herencia\src\Rules\ReglaCostesEnvio;
 
 class Calculadora {
     private $carrito;
@@ -101,8 +102,8 @@ class Calculadora {
         }
 
          // 4. Calcular coste de envío
-        $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
-
+        // $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
+        $shipping_cost = ReglaCostesEnvio::regla_coste_envio($final_subtotal, $this->cupones);
         // Total final
         $total_price = $final_subtotal + $shipping_cost;
 
