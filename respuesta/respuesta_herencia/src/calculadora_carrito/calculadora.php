@@ -45,12 +45,14 @@ class Calculadora {
             $name = $item_cupon;
             $start_date = $COUPONS_DB[$name][0]; //Revisar para que no haya fallos
             $finish_date   = $COUPONS_DB[$name][1]; // revisar para qu eno haya fallos
-            $acumulative = $COUPONS_DB[$name][1] ?? true; // acumulativos
+            $acumulative = $COUPONS_DB[$name][2] ?? true; // acumulativos
             // Asignar los valores correspondientes del array a su variable
+            
             $cupones_carrito = new Cupon(
                 name:  $name,
                 start_date: $start_date,
-                finish_date:   $finish_date
+                finish_date: $finish_date,
+                acumulative: $acumulative,
             );
             $this->cupones[] = $cupones_carrito;
         }
@@ -124,8 +126,18 @@ class Calculadora {
 
         return 0.0;
     }
+    public function aplicar_descuentos_cupones(float $final_subtotal, $cupones): float {
+        //la idea es hacer un cupon que sea no acumulable. Hay que encontrar ese cupon
+        $cuponNoAcumulable = true;
+        $CuponNoAcumulable = null;
+        $hasCuponNoAcumulable = array_filter($cupones, function($cupon) {
+            return $cupon->isAcumulative() === false;
+        });      
 
-    public function aplicar_descuentos_cupones(float $subtotal, $cupones): float {
+        if($hasCuponNoAcumulable) {
+            $cupones = $hasCuponNoAcumulable;
+        }
+
         foreach ($cupones as $cupon) {
             //----comprobamos las fechas----
             $start_coupon = $cupon->getStartDate();
@@ -157,7 +169,7 @@ class Calculadora {
                     break;
             }
         }
-        return $subtotal;
+        return $final_subtotal;
     }
 
 
