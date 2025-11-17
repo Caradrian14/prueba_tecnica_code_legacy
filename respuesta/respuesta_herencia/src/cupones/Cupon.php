@@ -1,7 +1,6 @@
 <?php
 namespace respuesta_herencia\src\cupones;
 class Cupon {
-    public $id;
     public $name;
     public $start_date;
     public $finish_date;

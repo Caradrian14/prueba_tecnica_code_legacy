@@ -10,7 +10,7 @@ require __DIR__ . '/src/Cupones/CuponDescuento1Euro.php';
 require __DIR__ . '/src/calculadora_carrito/calculadora.php';
 //y demas require
 
-use respuesta_herencia\src\calculadora_carrito\Calculadora; // Importar el namespace
+use respuesta_herencia\src\calculadora_carrito\Calculadora;
 
 //creamos el carrito y agregamos el producto de la prueba
 $cart1 = [['sku' => 'PLT', 'quantity' => 3]];

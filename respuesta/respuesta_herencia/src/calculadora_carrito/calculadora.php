@@ -1,16 +1,61 @@
 <?php
 
 namespace respuesta_herencia\src\calculadora_carrito;
-
+use respuesta_herencia\src\productos\Producto;
+use Cupon;
 class Calculadora {
     private $carrito;
     private $cupones;
 
     public function __construct($carrito, $cupones) {
-        $this->carrito = $carrito;
-        $this->cupones = $cupones;
+        // $this->carrito = $carrito;
+        // $this->cupones = $cupones;
+        $this->creacion_objetos($carrito, $cupones);
     }
 
+    public function creacion_objetos($carrito, $cupones) {
+        // Usamos el array a modoo de bbdd pero aqui habria que hacer una consulta select where a la bbdd 
+        $PRODUCTOS_DB = require __DIR__ . "/../../datos/productos.php";
+        $COUPONS_DB = require __DIR__ . "/../../datos/cupones.php";
+        foreach ($carrito as $item_carrito) {
+            if (!isset($PRODUCTOS_DB[$item_carrito['sku']])) {
+                continue; // Ignorar productos que no existen
+            }
+
+            $sku = $item_carrito['sku'];
+            $name  = $data['name']  ?? '';
+            $price = $data['price'] ?? 0;
+            $tag   = $data['tag']   ?? [];
+            // Asignar los valores correspondientes del array a su variable
+            $producto_carrito = new Producto(
+                sku:   $sku,
+                name:  $name,
+                price: $price,
+                tag:   $tag
+            );
+            $this->carrito[] = $producto_carrito;
+        }
+
+        foreach ($cupones as $item_cupon) {
+            if (!isset($COUPONS_DB[$item_cupon])) {
+                continue; // Ignorar productos que no existen
+            }
+            $name = $item_cupon;
+            $start_date = $COUPONS_DB[$name][0]; //Revisar para que no haya fallos
+            $finish_date   = $COUPONS_DB[$name][1]; // revisar para qu eno haya fallos
+            $acumulative = $COUPONS_DB[$name][1] ?? true; // acumulativos
+            // Asignar los valores correspondientes del array a su variable
+            $cupones_carrito = new Cupon(
+                name:  $name,
+                start_date: $start_date,
+                finish_date:   $finish_date
+            );
+            $this->cupones[] = $cupones_carrito;
+        }
+        var_dump($this->cupones) . "<br>";
+        var_dump($this->carrito) . "<br>";
+        exit();
+    }
 
     // Vamos a empezar con que las reglas de negocio son funciones, una vez ya funcional las pasamos a objetos.
     public function inicio_carrito() {
@@ -21,7 +66,7 @@ class Calculadora {
 
         //Obtenemos los datos de la bbdd
         $PRODUCTOS_DB = require __DIR__ . "/../../datos/productos.php";
-        
+
         //1. Calcular subtotal bruto
         foreach ($this->carrito as $item) {
             $sku = $item['sku'];
@@ -80,7 +125,7 @@ class Calculadora {
         return 0.0;
     }
 
-    //Aqui hay que aplicar los objetos cupones
+    //----REFCTORIZAR CUPONES----
     public function aplicar_descuentos_cupones(float $subtotal, array $cupones): float {
         $has_1euros_coupon = in_array('1EUROS', $cupones);
         $has_2euros_coupon = in_array('2EUROS', $cupones);
