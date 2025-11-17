@@ -55,9 +55,7 @@ class Calculadora {
         }
     }
 
-    // Vamos a empezar con que las reglas de negocio son funciones, una vez ya funcional las pasamos a objetos.
     public function inicio_carrito() {
-        //Definimos variables base
         $raw_subtotal = 0;   // Subtotal antes de CUALQUIER descuento
         $total_items = 0;    // Cantidad total de items
         $bogo_discount = 0;  // Descuento acumulado por BOGO
@@ -84,13 +82,10 @@ class Calculadora {
             // Aplicar regla BOGO usando la clase BogoRule
             $bogo_discount += ReglaBogo::regla_bogo($product_data, $quantity);
 
-            // $bogo_discount += $this->regla_bogo($product_data, $quantity);
-
         }
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;
         // 2. Aplicar Descuento por Volumen (Regla 2)
-        // $volume_discount = $this->regla_volumen($total_items, $raw_subtotal);
         $volume_discount = ReglaDescuentoVolumen::regla_volumen($total_items, $raw_subtotal);
 
 
@@ -99,12 +94,10 @@ class Calculadora {
 
         // 3. Aplicar descuentos de cupones
         if($this->cupones != NULL){
-            // $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
             $final_subtotal = ReglaCupones::aplicar_descuentos_cupones($final_subtotal, $this->cupones);
         }
 
          // 4. Calcular coste de envío
-        // $shipping_cost = $this->calcular_coste_envio($final_subtotal, $this->cupones);
         $shipping_cost = ReglaCostesEnvio::regla_coste_envio($final_subtotal, $this->cupones);
         // Total final
         $total_price = $final_subtotal + $shipping_cost;

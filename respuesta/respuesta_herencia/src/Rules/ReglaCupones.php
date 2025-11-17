@@ -32,24 +32,21 @@ class ReglaCupones {
             
             $nombre_cupon = $cupon->getName();
             $has_freeshipping_coupon = false;
-            //Se podria haber hecho con un caso de array, pero mejor switch case (?)
+            //Se podria haber hecho con un caso de array, pero mejor switch case
             switch ($nombre_cupon) {
                 case "1EUROS":
-                    //llamada a funciones de cada hijo cupon?
-                    // $final_subtotal -= 1.00;
                     $final_subtotal = CuponDescuento1Euro::calculo_cupon_descuento_1euro($final_subtotal);
                     break;
                 case "2EUROS":
                     $final_subtotal = CuponDescuento2Euro::calculo_cupon_descuento_2euro($final_subtotal);
-                    // $final_subtotal -= 2.00;
                     break;
                 case "10EUROS":
-                    // $final_subtotal -= 10.00;
                     $final_subtotal = CuponDescuento10Euro::calculo_cupon_descuento_10euro($final_subtotal);
                     break;
                 case "BLACKFRIDAY":
-                    $final_subtotal *= 0.80;
                     $final_subtotal = CuponDescuentoBlackFriday::calculo_cupon_descuento_blackfriday($final_subtotal);
+                    break;
+                default:
                     break;
             }
         }
