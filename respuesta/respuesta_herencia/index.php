@@ -14,6 +14,7 @@ require_once __DIR__ . '/src/Factory/CuponFactory.php';
 require_once __DIR__ . '/src/Rules\ReglaBogo.php';
 require_once __DIR__ . '/src/Rules\ReglaDescuentoVolumen.php';
 require_once __DIR__ . '/src/Rules\ReglaCostesEnvio.php';
+require_once __DIR__ . '/src/Rules\ReglaCupones.php';
 
 use respuesta_herencia\src\Calculadora_carrito\Calculadora;
 

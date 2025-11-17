@@ -9,6 +9,7 @@ use respuesta_herencia\src\Factory\CuponFactory;
 use respuesta_herencia\src\Rules\ReglaBogo;
 use respuesta_herencia\src\Rules\ReglaDescuentoVolumen;
 use respuesta_herencia\src\Rules\ReglaCostesEnvio;
+use respuesta_herencia\src\Rules\ReglaCupones;
 
 class Calculadora {
     private $carrito;
@@ -98,7 +99,8 @@ class Calculadora {
 
         // 3. Aplicar descuentos de cupones
         if($this->cupones != NULL){
-            $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
+            // $final_subtotal = $this->aplicar_descuentos_cupones($final_subtotal, $this->cupones);
+            $final_subtotal = ReglaCupones::aplicar_descuentos_cupones($final_subtotal, $this->cupones);
         }
 
          // 4. Calcular coste de envío
@@ -108,79 +110,5 @@ class Calculadora {
         $total_price = $final_subtotal + $shipping_cost;
 
         return round($total_price, 2);
-    }
-
-    public function regla_volumen(int $total_items, float $raw_subtotal): float
-    {
-        // Regla: Si hay 5 o más items, se aplica 10% de descuento
-        if ($total_items >= 5) {
-            return $raw_subtotal * 0.10;
-        }
-
-        return 0.0;
-    }
-    public function aplicar_descuentos_cupones(float $final_subtotal, $cupones): float {
-        //la idea es hacer un cupon que sea no acumulable. Hay que encontrar ese cupon
-        $cuponNoAcumulable = true;
-        $CuponNoAcumulable = null;
-        $hasCuponNoAcumulable = array_filter($cupones, function($cupon) {
-            return $cupon->isAcumulative() === false;
-        });      
-
-        if($hasCuponNoAcumulable) {
-            $cupones = $hasCuponNoAcumulable;
-        }
-
-        foreach ($cupones as $cupon) {
-            //----comprobamos las fechas----
-            $start_coupon = $cupon->getStartDate();
-            $finish_coupon = $cupon->getFinishDate();
-            $start_coupon_date = new DateTime($start_coupon);
-            $finish_coupon_date = new DateTime($finish_coupon);
-            $today = new DateTime();
-            if ($today < $start_coupon_date || $today > $finish_coupon_date) {
-                continue;
-            }
-            //----Fin comprobamos las fechas----
-            
-            $nombre_cupon = $cupon->getName();
-            $has_freeshipping_coupon = false;
-            //Se podria haber hecho con un caso de array, pero mejor switch case (?)
-            switch ($nombre_cupon) {
-                case "1EUROS":
-                    //llamada a funciones de cada hijo cupon?
-                    $final_subtotal -= 1.00;
-                    break;
-                case "2EUROS":
-                    $final_subtotal -= 2.00;
-                    break;
-                case "10EUROS":
-                    $final_subtotal -= 10.00;
-                    break;
-                case "BLACKFRIDAY":
-                    $final_subtotal *= 0.80;
-                    break;
-            }
-        }
-        return $final_subtotal;
-    }
-
-
-    public function calcular_coste_envio(float $subtotal, $cupones): float {
-        // Poner en otra funcion
-        $has_freeshipping_coupon = false;
-        if($cupones != NULL) {
-            foreach ($cupones as $cupon) {
-                if($cupon->getName() == "FREESHIPPING") {
-                    $has_freeshipping_coupon = true;
-                }
-            }
-        }
-        
-        if ($subtotal >= 50.00) {
-            return 0.0; // Envío gratis por superar 50€
-        } else {
-            return $has_freeshipping_coupon ? 0.0 : 5.00; // Envío estándar si no hay cupón
-        }
     }
 }
