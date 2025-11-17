@@ -6,12 +6,12 @@ $COUPONS = require __DIR__ . "/datos/cupones.php";
 
 //ahora pasariamos a la logica de negocio
 require __DIR__ . '/src/Cupones/Cupon.php';
-require __DIR__ . '/src/productos/Producto.php';
+require __DIR__ . '/src/Productos/Producto.php';
 require __DIR__ . '/src/Cupones/CuponDescuento1Euro.php';
-require __DIR__ . '/src/calculadora_carrito/calculadora.php';
+require __DIR__ . '/src/Calculadora_carrito/CalculadoraCarrito.php';
 //y demas require
 
-use respuesta_herencia\src\calculadora_carrito\Calculadora;
+use respuesta_herencia\src\Calculadora_carrito\Calculadora;
 
 //creamos el carrito y agregamos el producto de la prueba
 $cart1 = [['sku' => 'PLT', 'quantity' => 3]];

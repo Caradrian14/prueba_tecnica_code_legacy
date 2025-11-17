@@ -1,6 +1,6 @@
 <?php
 
-namespace respuesta_herencia\src\calculadora_carrito;
+namespace respuesta_herencia\src\Calculadora_carrito;
 use respuesta_herencia\src\productos\Producto;
 use respuesta_herencia\src\cupones\Cupon;
 use Datetime;
