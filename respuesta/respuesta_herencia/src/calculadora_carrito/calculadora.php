@@ -125,28 +125,6 @@ class Calculadora {
         return 0.0;
     }
 
-    //----REFCTORIZAR CUPONES----
-    public function aplicar_descuentos_cupones2(float $subtotal, array $cupones): float {
-        $has_1euros_coupon = in_array('1EUROS', $cupones);
-        $has_2euros_coupon = in_array('2EUROS', $cupones);
-        $has_10euros_coupon = in_array('10EUROS', $cupones);
-        $has_blackfriday_coupon = in_array('BLACKFRIDAY', $cupones);
-
-        if ($has_1euros_coupon) {
-            $subtotal -= 1.00;
-        } else if ($has_2euros_coupon) {
-            $subtotal -= 2.00;
-        } else if ($has_10euros_coupon) {
-            $subtotal -= 10.00;
-        } else if ($has_blackfriday_coupon && date('Y-m-d') >= '2025-11-20' && date('Y-m-d') <= '2025-11-30') {
-            // Aplicar 20% de descuento adicional en Black Friday
-            $subtotal *= 0.80;
-        }
-
-        return $subtotal;
-    }
-
-
     public function aplicar_descuentos_cupones(float $subtotal, $cupones): float {
         foreach ($cupones as $cupon) {
             $nombre_cupon = $cupon->getName();
