@@ -4,6 +4,8 @@ namespace respuesta_herencia\src\Calculadora_carrito;
 use respuesta_herencia\src\productos\Producto;
 use respuesta_herencia\src\cupones\Cupon;
 use Datetime;
+use respuesta_herencia\src\Factory\ProductoFactory;
+use respuesta_herencia\src\Factory\CuponFactory;
 
 class Calculadora {
     private $carrito;
@@ -27,14 +29,9 @@ class Calculadora {
             $quantity  = $item_carrito['quantity']  ?? '';
             $price = $PRODUCTOS_DB[$sku]['price'] ?? 0;
             $tag   = $PRODUCTOS_DB[$sku]['tag']   ?? [];
+            $items_de_producto =["sku" => $sku, "name" => $name, "quantity" => $quantity, "price"=>$price, "tag"=>$tag];
+            $producto_carrito = ProductoFactory::fromArray($items_de_producto);
             // Asignar los valores correspondientes del array a su variable
-            $producto_carrito = new Producto(
-                sku:   $sku,
-                name:  $name,
-                quantity: $quantity,
-                price: $price,
-                tag:   $tag
-            );
             $this->carrito[] = $producto_carrito;
         }
 
@@ -47,14 +44,10 @@ class Calculadora {
             $finish_date   = $COUPONS_DB[$name][1]; // revisar para qu eno haya fallos
             $acumulative = $COUPONS_DB[$name][2] ?? true; // acumulativos
             // Asignar los valores correspondientes del array a su variable
+            $items_de_cupon =["name" => $name, "start_date" => $start_date, "finish_date"=>$finish_date, "acumulative"=>$acumulative];
             
-            $cupones_carrito = new Cupon(
-                name:  $name,
-                start_date: $start_date,
-                finish_date: $finish_date,
-                acumulative: $acumulative,
-            );
-            $this->cupones[] = $cupones_carrito;
+            $cupon_carrito = CuponFactory::fromArray($items_de_cupon);
+            $this->cupones[] = $cupon_carrito;
         }
     }
 

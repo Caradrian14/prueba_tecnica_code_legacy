@@ -9,6 +9,9 @@ require __DIR__ . '/src/Cupones/Cupon.php';
 require __DIR__ . '/src/Productos/Producto.php';
 require __DIR__ . '/src/Cupones/CuponDescuento1Euro.php';
 require __DIR__ . '/src/Calculadora_carrito/CalculadoraCarrito.php';
+require_once __DIR__ . '/src/Factory/ProductoFactory.php';
+require_once __DIR__ . '/src/Factory/CuponFactory.php';
+
 //y demas require
 
 use respuesta_herencia\src\Calculadora_carrito\Calculadora;
