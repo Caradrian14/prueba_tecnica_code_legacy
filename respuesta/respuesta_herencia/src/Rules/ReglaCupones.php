@@ -19,17 +19,10 @@ class ReglaCupones {
         }
 
         foreach ($coupons as $coupon) {
-            //----comprobamos las fechas----
-            $start_coupon = $coupon->getStartDate();
-            $finish_coupon = $coupon->getFinishDate();
-            $start_coupon_date = new DateTime($start_coupon);
-            $finish_coupon_date = new DateTime($finish_coupon);
-            $today = new DateTime();
-            if ($today < $start_coupon_date || $today > $finish_coupon_date) {
+            $has_a_valid_date = $coupon->is_date_valid();
+            if (!$has_a_valid_date) {
                 continue;
             }
-            //----Fin comprobamos las fechas----
-            
             $name_coupon = $coupon->getName();
             $has_freeshipping_coupon = false;
             //Se podria haber hecho con un caso de array, pero mejor switch case

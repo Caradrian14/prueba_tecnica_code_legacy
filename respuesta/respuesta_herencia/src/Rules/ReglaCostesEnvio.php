@@ -8,7 +8,7 @@ class ReglaCostesEnvio {
         $has_freeshipping_coupon = false;
         if($cupones != NULL) {
             foreach ($cupones as $cupon) {
-                if($cupon->getName() == "FREESHIPPING") {
+                if($cupon->getName() == "FREESHIPPING" && $cupon->is_date_valid()) {
                     $has_freeshipping_coupon = true;
                 }
             }

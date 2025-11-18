@@ -1,5 +1,7 @@
 <?php
 namespace respuesta_herencia\src\cupones;
+use Datetime;
+
 class Cupon {
     public $name;
     public $start_date;
@@ -13,12 +15,24 @@ class Cupon {
         $this->acumulative = $acumulative;
     }
 
-    public function esValido(): bool {
+    public function is_date_valid2(): bool {
         $today = date('Y-m-d');
         if ($today>= $this->start_date && $hoy <= $this->fechaFin) {
             return true;
         }
         return false;
+    }
+
+    public function is_date_valid(): bool {
+        $start_coupon = $this->getStartDate();
+        $finish_coupon = $this->getFinishDate();
+        $start_coupon_date = new DateTime($start_coupon);
+        $finish_coupon_date = new DateTime($finish_coupon);
+        $today = new DateTime();
+        if ($today < $start_coupon_date || $today > $finish_coupon_date) {
+            return false;
+        }
+        return true;
     }
 
     // Revisar par alos hijos si los hay
