@@ -15,14 +15,6 @@ class Cupon {
         $this->acumulative = $acumulative;
     }
 
-    public function is_date_valid2(): bool {
-        $today = date('Y-m-d');
-        if ($today>= $this->start_date && $hoy <= $this->fechaFin) {
-            return true;
-        }
-        return false;
-    }
-
     public function is_date_valid(): bool {
         $start_coupon = $this->getStartDate();
         $finish_coupon = $this->getFinishDate();
