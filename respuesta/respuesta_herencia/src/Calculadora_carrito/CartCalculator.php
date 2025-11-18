@@ -80,13 +80,13 @@ class CartCalculator {
             $total_items += $quantity;
     
             // Aplicar regla BOGO usando la clase BogoRule
-            $bogo_discount += ReglaBogo::regla_bogo($product_data, $quantity);
+            $bogo_discount += ReglaBogo::bogo_rule($product_data, $quantity);
 
         }
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;
         // 2. Aplicar Descuento por Volumen (Regla 2)
-        $volume_discount = ReglaDescuentoVolumen::regla_volumen($total_items, $raw_subtotal);
+        $volume_discount = ReglaDescuentoVolumen::volume_rule($total_items, $raw_subtotal);
 
 
         // Subtotal final (BOGO + Volumen)
@@ -98,7 +98,7 @@ class CartCalculator {
         }
 
          // 4. Calcular coste de envío
-        $shipping_cost = ReglaCostesEnvio::regla_coste_envio($final_subtotal, $this->coupons);
+        $shipping_cost = ReglaCostesEnvio::rule_shipping_cost($final_subtotal, $this->coupons);
         // Total final
         $total_price = $final_subtotal + $shipping_cost;
 

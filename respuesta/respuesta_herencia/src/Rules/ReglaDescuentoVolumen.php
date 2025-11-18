@@ -3,7 +3,7 @@ namespace respuesta_herencia\src\Rules;
 
 
 class ReglaDescuentoVolumen {
-    public static function regla_volumen(int $total_items, float $raw_subtotal): float
+    public static function volume_rule(int $total_items, float $raw_subtotal): float
     {
         // Regla: Si hay 5 o más items, se aplica 10% de descuento
         if ($total_items >= 5) {

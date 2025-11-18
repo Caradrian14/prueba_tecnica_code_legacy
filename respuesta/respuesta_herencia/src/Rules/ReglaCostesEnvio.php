@@ -3,7 +3,7 @@ namespace respuesta_herencia\src\Rules;
 
 
 class ReglaCostesEnvio {
-    public static function regla_coste_envio(float $subtotal, $cupones): float {
+    public static function rule_shipping_cost(float $subtotal, $cupones): float {
         // Poner en otra funcion
         $has_freeshipping_coupon = false;
         if($cupones != NULL) {
