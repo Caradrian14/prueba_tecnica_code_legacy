@@ -28,16 +28,16 @@ class ReglaCupones {
             //Se podria haber hecho con un caso de array, pero mejor switch case
             switch ($name_coupon) {
                 case "1EUROS":
-                    $final_subtotal = CuponDescuento1Euro::calculo_cupon_descuento_1euro($final_subtotal);
+                    $final_subtotal = CuponDescuento1Euro::calculate_coupon_discount_1euro($final_subtotal);
                     break;
                 case "2EUROS":
-                    $final_subtotal = CuponDescuento2Euro::calculo_cupon_descuento_2euro($final_subtotal);
+                    $final_subtotal = CuponDescuento2Euro::calculate_coupon_discount_2euro($final_subtotal);
                     break;
                 case "10EUROS":
-                    $final_subtotal = CuponDescuento10Euro::calculo_cupon_descuento_10euro($final_subtotal);
+                    $final_subtotal = CuponDescuento10Euro::calculate_coupon_discount_10euro($final_subtotal);
                     break;
                 case "BLACKFRIDAY":
-                    $final_subtotal = CuponDescuentoBlackFriday::calculo_cupon_descuento_blackfriday($final_subtotal);
+                    $final_subtotal = CuponDescuentoBlackFriday::calculate_coupon_discount_blackfriday($final_subtotal);
                     break;
                 default:
                     break;
