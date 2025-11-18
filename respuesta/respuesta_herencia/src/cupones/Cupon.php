@@ -35,11 +35,6 @@ class Cupon {
         return true;
     }
 
-    // Revisar par alos hijos si los hay
-    //abstract public function aplicarDescuento(float $subtotal): float;
-
-    // --- GETTERS ---
-
     public function getName(): string
     {
         return $this->name;
@@ -59,8 +54,6 @@ class Cupon {
     {
         return $this->acumulative;
     }
-
-    // --- SETTERS ---
 
     public function setName(string $name): self
     {
