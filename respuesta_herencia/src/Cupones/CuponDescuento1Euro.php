@@ -12,7 +12,7 @@ class CuponDescuento1Euro extends Cupon {
      */
     public static function calculate_coupon_discount_1euro(float $final_subtotal): float
     {
-        return $final_subtotal - 1.00;;
+        return $final_subtotal - 1.00;
     }
 }
 ?>
