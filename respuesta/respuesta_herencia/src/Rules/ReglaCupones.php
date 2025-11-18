@@ -6,22 +6,22 @@ use respuesta_herencia\src\cupones\CuponDescuento2Euro;
 use respuesta_herencia\src\cupones\CuponDescuento10Euro;
 use respuesta_herencia\src\cupones\CuponDescuentoBlackFriday;
 class ReglaCupones {
-    public static function aplicar_descuentos_cupones(float $final_subtotal, $cupones): float {
+    public static function apply_discount_coupons(float $final_subtotal, $coupons): float {
         //la idea es hacer un cupon que sea no acumulable. Hay que encontrar ese cupon
         $cuponNoAcumulable = true;
         $CuponNoAcumulable = null;
-        $hasCuponNoAcumulable = array_filter($cupones, function($cupon) {
-            return $cupon->isAcumulative() === false;
+        $hasCuponNoAcumulable = array_filter($coupons, function($coupon) {
+            return $coupon->isAcumulative() === false;
         });      
 
         if($hasCuponNoAcumulable) {
-            $cupones = $hasCuponNoAcumulable;
+            $coupons = $hasCuponNoAcumulable;
         }
 
-        foreach ($cupones as $cupon) {
+        foreach ($coupons as $coupon) {
             //----comprobamos las fechas----
-            $start_coupon = $cupon->getStartDate();
-            $finish_coupon = $cupon->getFinishDate();
+            $start_coupon = $coupon->getStartDate();
+            $finish_coupon = $coupon->getFinishDate();
             $start_coupon_date = new DateTime($start_coupon);
             $finish_coupon_date = new DateTime($finish_coupon);
             $today = new DateTime();
@@ -30,10 +30,10 @@ class ReglaCupones {
             }
             //----Fin comprobamos las fechas----
             
-            $nombre_cupon = $cupon->getName();
+            $name_coupon = $coupon->getName();
             $has_freeshipping_coupon = false;
             //Se podria haber hecho con un caso de array, pero mejor switch case
-            switch ($nombre_cupon) {
+            switch ($name_coupon) {
                 case "1EUROS":
                     $final_subtotal = CuponDescuento1Euro::calculo_cupon_descuento_1euro($final_subtotal);
                     break;

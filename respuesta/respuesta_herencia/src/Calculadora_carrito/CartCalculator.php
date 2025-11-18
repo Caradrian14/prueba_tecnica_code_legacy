@@ -94,7 +94,7 @@ class CartCalculator {
 
         // 3. Aplicar descuentos de cupones
         if($this->coupons != NULL){
-            $final_subtotal = ReglaCupones::aplicar_descuentos_cupones($final_subtotal, $this->coupons);
+            $final_subtotal = ReglaCupones::apply_discount_coupons($final_subtotal, $this->coupons);
         }
 
          // 4. Calcular coste de envío
