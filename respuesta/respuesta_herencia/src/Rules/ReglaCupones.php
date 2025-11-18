@@ -6,12 +6,20 @@ use respuesta_herencia\src\cupones\CuponDescuento2Euro;
 use respuesta_herencia\src\cupones\CuponDescuento10Euro;
 use respuesta_herencia\src\cupones\CuponDescuentoBlackFriday;
 class ReglaCupones {
+    /**
+     * Funcion para aplicar la regla de los cupones, 
+     * se hace una comprobacion de los cupones que hay y si son o no acumlables, 
+     * de no ser acumulables, solo se selecciona el no acumulable. 
+     * 
+     * @param  float $final_subtotal 
+     * @param  array $coupons array del objeto Cupones que son los que ha introducido el cliente
+     * @return float $final_subtotal 
+     */
     public static function apply_discount_coupons(float $final_subtotal, $coupons): float {
-        //la idea es hacer un cupon que sea no acumulable. Hay que encontrar ese cupon
         $cuponNoAcumulable = true;
         $CuponNoAcumulable = null;
         $hasCuponNoAcumulable = array_filter($coupons, function($coupon) {
-            return $coupon->isAcumulative() === false;
+            return $coupon->isAcumulative() === false; // esto no hace return a la funcion en si solo a esa variable $hasCuponNoAcumulable
         });      
 
         if($hasCuponNoAcumulable) {
