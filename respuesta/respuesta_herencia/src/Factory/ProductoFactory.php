@@ -4,6 +4,12 @@ use respuesta_herencia\src\productos\Producto;
 
 
 class ProductoFactory {
+    /**
+     * Crea un objetode tipo Producto
+     * 
+     * @param  array $items_de_producto
+     * @return Producto producto_carrito
+     */
     public static function fromArray(array $items_de_producto): Producto {
         $producto_carrito = new Producto(
             sku:   $items_de_producto["sku"],
