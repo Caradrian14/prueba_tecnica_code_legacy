@@ -14,6 +14,7 @@ require_once __DIR__ . '/src/Cupones\CuponDescuento1Euro.php';
 require_once __DIR__ . '/src/Cupones\CuponDescuento2Euro.php';
 require_once __DIR__ . '/src/Cupones\CuponDescuento10Euro.php';
 require_once __DIR__ . '/src/Cupones\CuponDescuentoBlackFriday.php';
+require_once __DIR__ . '/src/Cupones\CuponFreeShipping.php';
 use respuesta_herencia\src\Calculadora_carrito\CartCalculator;
 
 $cart1 = [['sku' => 'PLT', 'quantity' => 3]];

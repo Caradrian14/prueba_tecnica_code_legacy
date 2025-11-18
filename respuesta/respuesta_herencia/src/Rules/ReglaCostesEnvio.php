@@ -1,5 +1,6 @@
 <?php
 namespace respuesta_herencia\src\Rules;
+use respuesta_herencia\src\cupones\CuponFreeShipping;
 
 
 class ReglaCostesEnvio {
@@ -16,7 +17,7 @@ class ReglaCostesEnvio {
         if ($subtotal >= 50.00) {
             return 0.0; // Envío gratis por superar 50€
         } else {
-            return $has_freeshipping_coupon ? 0.0 : 5.00; // Envío estándar si no hay cupón
+            return $has_freeshipping_coupon ? CuponFreeshipping::get_freeshipping() : 5.00; // Envío estándar si no hay cupón
         }
     }
 }
