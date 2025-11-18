@@ -55,7 +55,7 @@ class CartCalculator {
         }
     }
 
-    public function inicio_carrito() {
+    public function start_calculator_cart() {
         $raw_subtotal = 0;   // Subtotal antes de CUALQUIER descuento
         $total_items = 0;    // Cantidad total de items
         $bogo_discount = 0;  // Descuento acumulado por BOGO
