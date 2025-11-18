@@ -16,11 +16,8 @@ class Producto {
         $this->tag = $tag;
     }
 
-    public function calcularDescuentoBOGO($cantidad) {
-    }
-
     // gettes y setters
-    //$sku
+
     public function getSku() {
         return $this->sku;
     }
@@ -29,7 +26,6 @@ class Producto {
         $this->sku = $sku;
     }
 
-    //$name
     public function getName() {
         return $this->name;
     }
@@ -38,7 +34,6 @@ class Producto {
         $this->name = $name;
     }
 
-    //$quantity
     public function getQuantity() {
         return $this->quantity;
     }
@@ -47,7 +42,6 @@ class Producto {
         $this->quantity = $quantity;
     }
 
-    //$price
     public function getPrice() {
         return $this->price;
     }
@@ -56,7 +50,6 @@ class Producto {
         $this->price = $price;
     }
 
-    //$tag
     public function getTag() {
         return $this->tag;
     }
