@@ -13,13 +13,13 @@ use respuesta_herencia\src\Rules\ReglaCupones;
 
 class CartCalculator {
     private $cart;
-    private $cupones;
+    private $coupons;
 
-    public function __construct($cart, $cupones) {
-        $this->creacion_objetos($cart, $cupones);
+    public function __construct($cart, $coupons) {
+        $this->object_creation($cart, $coupons);
     }
     // Pasar a un fctory?
-    public function creacion_objetos($cart, $cupones) {
+    public function object_creation($cart, $coupons) {
         // Usamos el array a modoo de bbdd pero aqui habria que hacer una consulta select where a la bbdd 
         $PRODUCTOS_DB = require __DIR__ . "/../../datos/productos.php";
         $COUPONS_DB = require __DIR__ . "/../../datos/cupones.php";
@@ -39,7 +39,7 @@ class CartCalculator {
             $this->carrito[] = $producto_carrito;
         }
 
-        foreach ($cupones as $item_cupon) {
+        foreach ($coupons as $item_cupon) {
             if (!isset($COUPONS_DB[$item_cupon])) {
                 continue; // Ignorar productos que no existen
             }
@@ -51,7 +51,7 @@ class CartCalculator {
             $items_de_cupon =["name" => $name, "start_date" => $start_date, "finish_date"=>$finish_date, "acumulative"=>$acumulative];
             
             $cupon_carrito = CuponFactory::fromArray($items_de_cupon);
-            $this->cupones[] = $cupon_carrito;
+            $this->coupons[] = $cupon_carrito;
         }
     }
 
@@ -93,12 +93,12 @@ class CartCalculator {
         $final_subtotal = $subtotal_after_bogo - $volume_discount;
 
         // 3. Aplicar descuentos de cupones
-        if($this->cupones != NULL){
-            $final_subtotal = ReglaCupones::aplicar_descuentos_cupones($final_subtotal, $this->cupones);
+        if($this->coupons != NULL){
+            $final_subtotal = ReglaCupones::aplicar_descuentos_cupones($final_subtotal, $this->coupons);
         }
 
          // 4. Calcular coste de envío
-        $shipping_cost = ReglaCostesEnvio::regla_coste_envio($final_subtotal, $this->cupones);
+        $shipping_cost = ReglaCostesEnvio::regla_coste_envio($final_subtotal, $this->coupons);
         // Total final
         $total_price = $final_subtotal + $shipping_cost;
 
