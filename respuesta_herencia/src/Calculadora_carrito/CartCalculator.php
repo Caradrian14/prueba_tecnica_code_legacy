@@ -102,7 +102,6 @@ class CartCalculator {
     
             // Aplicar regla BOGO usando la clase BogoRule
             $bogo_discount += ReglaBogo::bogo_rule($product_data, $quantity);
-
         }
 
         $subtotal_after_bogo = $raw_subtotal - $bogo_discount;

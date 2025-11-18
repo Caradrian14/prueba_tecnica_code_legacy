@@ -33,6 +33,7 @@ class Cupon {
         return true;
     }
 
+    //getters y setters
     public function getName(): string
     {
         return $this->name;
