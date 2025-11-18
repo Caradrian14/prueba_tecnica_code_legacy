@@ -12,18 +12,18 @@ use respuesta_herencia\src\Rules\ReglaCostesEnvio;
 use respuesta_herencia\src\Rules\ReglaCupones;
 
 class CartCalculator {
-    private $carrito;
+    private $cart;
     private $cupones;
 
-    public function __construct($carrito, $cupones) {
-        $this->creacion_objetos($carrito, $cupones);
+    public function __construct($cart, $cupones) {
+        $this->creacion_objetos($cart, $cupones);
     }
     // Pasar a un fctory?
-    public function creacion_objetos($carrito, $cupones) {
+    public function creacion_objetos($cart, $cupones) {
         // Usamos el array a modoo de bbdd pero aqui habria que hacer una consulta select where a la bbdd 
         $PRODUCTOS_DB = require __DIR__ . "/../../datos/productos.php";
         $COUPONS_DB = require __DIR__ . "/../../datos/cupones.php";
-        foreach ($carrito as $item_carrito) {
+        foreach ($cart as $item_carrito) {
             if (!isset($PRODUCTOS_DB[$item_carrito['sku']])) {
                 continue; // Ignorar productos que no existen
             }
