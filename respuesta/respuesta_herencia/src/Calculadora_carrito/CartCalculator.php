@@ -15,10 +15,28 @@ class CartCalculator {
     private $cart;
     private $coupons;
 
+    /**
+     * Constructor del carrito de la compra, acepta el carrito y los cupones tal cual llegan de la bbdd, 
+     * es decir en la prueba los arrays. Llama a la funcion object_creation($cart, $coupons)
+     *
+     * @param  array    $cart       array asociativocon los sku, descripcionesy demas
+     * @param  array    $coupons    array asociativocon de los cupones     
+     * @return void
+     */
     public function __construct($cart, $coupons) {
         $this->object_creation($cart, $coupons);
     }
-    // Pasar a un fctory?
+
+    /**
+     *  Contruye los objetos (cupones y productos) pasados por el constructor, realiza un filtro de validez, 
+     *  y si son validos los pasa al Factory. 
+     *  Una vez construidos los pasamos a un array que se queda como los parametros de este objeto $cart y $coupons.
+     *  Dado que no hay BBBDD usaremos las llamadas al array, en un sitio profesional se comprobaria mediante consultas sql a la bbdd 
+     *
+     * @param  array    $cart       array asociativocon los sku, descripcionesy demas
+     * @param  array    $coupons    array asociativocon de los cupones
+     * @return void
+     */
     public function object_creation($cart, $coupons) {
         // Usamos el array a modoo de bbdd pero aqui habria que hacer una consulta select where a la bbdd 
         $PRODUCTS_DB = require __DIR__ . "/../../datos/productos.php";
@@ -55,6 +73,13 @@ class CartCalculator {
         }
     }
 
+    /**
+     * Inicia la logica de la calculadora del carrito, inicializa las variables de cada componente del calculo y 
+     * las llama a las distintas funcionalidades correspondientes 
+     * Dado que usa los parametros del propio objeto ya inicializado, no se requiere pasarle parametros 
+     * 
+     * @return float $total_price   precio final tras haber realizado todo el calculo, redondeado a dos digitos.
+     */
     public function start_calculator_cart() {
         $raw_subtotal = 0;   // Subtotal antes de CUALQUIER descuento
         $total_items = 0;    // Cantidad total de items
@@ -67,10 +92,6 @@ class CartCalculator {
         foreach ($this->cart as $item) {
             $sku = $item->getSku();
             $quantity = $item->getQuantity();
-            //Hay que comprobar que los productos existan ( esto seria un select where en la bbdd)
-            if (!isset($PRODUCTS_DB[$sku])) {
-                continue; // Ignorar productos que no existen
-            }
     
             $product_data = $PRODUCTS_DB[$sku];
             $price = $product_data['price'];
