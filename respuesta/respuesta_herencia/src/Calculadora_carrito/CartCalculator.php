@@ -11,7 +11,7 @@ use respuesta_herencia\src\Rules\ReglaDescuentoVolumen;
 use respuesta_herencia\src\Rules\ReglaCostesEnvio;
 use respuesta_herencia\src\Rules\ReglaCupones;
 
-class Calculadora {
+class CartCalculator {
     private $carrito;
     private $cupones;
 
