@@ -15,6 +15,11 @@ class Cupon {
         $this->acumulative = $acumulative;
     }
 
+    /**
+     * Comprueba que las fechas del cupon sea validas en base a la fecha actual usando los DateTime
+     * 
+     * @return bool si esta dentro de los valores adecuados de tiempo sera true, y si esta fuera de fecha sera false
+     */
     public function is_date_valid(): bool {
         $start_coupon = $this->getStartDate();
         $finish_coupon = $this->getFinishDate();
@@ -22,6 +27,7 @@ class Cupon {
         $finish_coupon_date = new DateTime($finish_coupon);
         $today = new DateTime();
         if ($today < $start_coupon_date || $today > $finish_coupon_date) {
+            //A nivel profesional aqui habria que lanzar un mensaje avisando al usuario de la inserccion de cupones fuera de fecha
             return false;
         }
         return true;
