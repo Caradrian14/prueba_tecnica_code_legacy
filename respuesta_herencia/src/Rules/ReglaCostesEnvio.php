@@ -12,7 +12,8 @@ class ReglaCostesEnvio {
      * @return float 0,0 el precio del shipping en base a la logica y si hay o no cupon
      */
     public static function rule_shipping_cost(float $subtotal, $cupones): float {
-        // Poner en otra funcion
+        $LIMIT_SUBTOTAL = 50;
+        $SHIPPING_ADDITION = 5.00;
         $has_freeshipping_coupon = false;
         if($cupones != NULL) {
             foreach ($cupones as $cupon) {
@@ -21,10 +22,10 @@ class ReglaCostesEnvio {
                 }
             }
         } 
-        if ($subtotal >= 50.00) {
-            return 0.0; // Envío gratis por superar 50€
+        if ($subtotal >= $LIMIT_SUBTOTAL) {
+            return 0.0; // Envio gratis por superar 50€
         } else {
-            return $has_freeshipping_coupon ? CuponFreeshipping::get_freeshipping() : 5.00; // Envío estándar si no hay cupón
+            return $has_freeshipping_coupon ? CuponFreeshipping::get_freeshipping() : $SHIPPING_ADDITION;
         }
     }
 }

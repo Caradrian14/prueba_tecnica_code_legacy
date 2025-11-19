@@ -12,9 +12,11 @@ class ReglaDescuentoVolumen {
      */
     public static function volume_rule(int $total_items, float $raw_subtotal): float
     {
+        $DISCOUNT = 0.10;
+        $NUMBER_LIMIT_ITEMS = 5;
         // Regla: Si hay 5 o más items, se aplica 10% de descuento
-        if ($total_items >= 5) {
-            return $raw_subtotal * 0.10;
+        if ($total_items >= $NUMBER_LIMIT_ITEMS) {
+            return $raw_subtotal * $DISCOUNT;
         }
         return 0.0;
     }

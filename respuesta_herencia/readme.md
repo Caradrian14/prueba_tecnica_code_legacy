@@ -8,7 +8,7 @@ Primero debo defender mi trabajo, , voy a pasar un enlace a mi repositorio donde
 
 Como programador de codigo legado se bien lo inutil que puede ser la ia a la hora de trabajar en codigo legado y el peligro que supone para romper cosas.
 
-[Enlace GitHub de listado de commits](https://github.com/Caradrian14/prueba_tecnica_code_legalicy/commits/master/)
+[Enlace GitHub de listado de commits](https://github.com/Caradrian14/prueba_tecnica_code_legacy/commits/master/)
 [Video en Youtobe de 4 min Explicando esto yo ](https://youtu.be/L0K9Hu5BsE4) por que asumo que estaran cansados de tanto leer.
 
 **La estructura** la he realizado siguiendo no solo los principios POO y SOLID si no que tambien me he inspirado en como trabajabamos en mi anterior puesto. 

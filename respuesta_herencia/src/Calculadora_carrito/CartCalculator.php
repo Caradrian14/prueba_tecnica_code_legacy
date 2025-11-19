@@ -43,7 +43,7 @@ class CartCalculator {
         $COUPONS_DB = require __DIR__ . "/../../datos/cupones.php";
         foreach ($cart as $item_cart) {
             if (!isset($PRODUCTS_DB[$item_cart['sku']])) {
-                continue; // Ignorar productos que no existen
+                continue;
             }
 
             $sku = $item_cart['sku'];
@@ -53,19 +53,18 @@ class CartCalculator {
             $tag   = $PRODUCTS_DB[$sku]['tag']   ?? [];
             $items_from_product =["sku" => $sku, "name" => $name, "quantity" => $quantity, "price"=>$price, "tag"=>$tag];
             $product_cart = ProductoFactory::fromArray($items_from_product);
-            // Asignar los valores correspondientes del array a su variable
             $this->cart[] = $product_cart;
         }
 
         foreach ($coupons as $item_cupon) {
             if (!isset($COUPONS_DB[$item_cupon])) {
-                continue; // Ignorar productos que no existen
+                continue;
             }
             $name = $item_cupon;
-            $start_date = $COUPONS_DB[$name][0]; //Revisar para que no haya fallos
-            $finish_date   = $COUPONS_DB[$name][1]; // revisar para qu eno haya fallos
-            $acumulative = $COUPONS_DB[$name][2] ?? true; // acumulativos
-            // Asignar los valores correspondientes del array a su variable
+            $start_date = $COUPONS_DB[$name][0];
+            $finish_date   = $COUPONS_DB[$name][1];
+            $acumulative = $COUPONS_DB[$name][2] ?? true;
+
             $items_from_coupon =["name" => $name, "start_date" => $start_date, "finish_date"=>$finish_date, "acumulative"=>$acumulative];
             
             $cupon_carrito = CuponFactory::fromArray($items_from_coupon);
@@ -85,7 +84,6 @@ class CartCalculator {
         $total_items = 0;    // Cantidad total de items
         $bogo_discount = 0;  // Descuento acumulado por BOGO
 
-        //Obtenemos los datos de la bbdd
         $PRODUCTS_DB = require __DIR__ . "/../../datos/productos.php";
 
         //1. Calcular subtotal bruto
