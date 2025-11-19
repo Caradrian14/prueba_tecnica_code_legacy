@@ -1,32 +1,37 @@
-# Descripcion de la prueba tecnica realizada para el Grupo Romeu
+# Descripción de la prueba técnica realizada para el Grupo Romeu
 
 ## Trabajo realizado
-Se ha construido una refactorizacion siguiendo los principios de POO, SOLID y la division de responsaibilidades. Ademas he aplicado lo aprendido en mi anterior puesto como para programador backend de apoyo.
+Se ha construido una refactorización siguiendo los principios de POO, SOLID y la **división de responsabilidades**. Además, he aplicado lo aprendido en mi anterior puesto como **programador backend de apoyo**.
 
-## Organizacion
-Primero debo defender mi trabajo, , voy a pasar un enlace a mi repositorio donde se podran ver los commits realizados y **se podra ver el proceso seguido de construccion y refinamiento del proyecto**. La ia solo se ha usado como consulta puntual en la organizacion y para arrancar el XAMPP.
+## Organización
+Primero, debo defender mi trabajo. Voy a compartir un enlace a mi repositorio, donde se podrán ver los *commits* realizados y **se podrá observar el proceso seguido de construcción y refinamiento del proyecto**. La IA solo se ha utilizado como consulta puntual para la organización y para arrancar el XAMPP.
 
-Como programador de codigo legado se bien lo inutil que puede ser la ia a la hora de trabajar en codigo legado y el peligro que supone para romper cosas.
+Como programador de código legado, sé lo **inútil que puede ser la IA a la hora de trabajar con código legado** y el peligro que supone para romper funcionalidades.
+
 
 [Enlace GitHub de listado de commits](https://github.com/Caradrian14/prueba_tecnica_code_legacy/commits/master/)
 [Video en Youtobe de 4 min Explicando esto yo ](https://youtu.be/L0K9Hu5BsE4) por que asumo que estaran cansados de tanto leer.
 
-**La estructura** la he realizado siguiendo no solo los principios POO y SOLID si no que tambien me he inspirado en como trabajabamos en mi anterior puesto. 
-- La carpeta `datos\` es donde se guardan la información que he considerado como que proviene de la BBDD o que simplemente llega asi a nuestro codigo. 
-- la carpeta `src\` que es donde se guarda el codigo siguiendo la estructura de POO y SOLID.
-- la carpeta `test` donde se dipositaran los test. 
-- el fichero `index.php` que es el que arranca el proceso llamndo a todos los objetos
+**La estructura** la he realizado siguiendo no solo los principios **POO y SOLID**, sino que también me he inspirado en cómo trabajábamos en mi anterior puesto.
 
-## Decisiones tecnicas
-- la carpeta `datos\`: En mi experiencia esto no se toca, ya que refactorizamos solo una zona concreta y la informacion y los datos nos llega como nos llega, dado que tocar esto corre el riesgo de romper otras partes del codigo en el contexto de un proyecto mayor; lo que hace que en el proceso haya decidido no tocar esta parte, solo para las pruebas.
+- La carpeta **`datos/`** es donde se guarda **la información** que he considerado como proveniente de la **base de datos** o que simplemente llega así a nuestro código.
+- La carpeta **`src/`** es donde se almacena el código, siguiendo la estructura de **POO y SOLID**.
+- La carpeta **`test/`** es donde se depositarán los *tests*.
+- El fichero **`index.php`** es el que inicia el proceso, llamando a todos los objetos necesarios.
 
-- la carpeta `src\Cupones\`: He decidido convertir los cupones en objetos hijos del objeto cupon. Esta decision se ha tomado por que se ,en mi experiencia, que estos objetos requieren de mas procesos, por ejemplo llamadas a api, bases de datos o mas comprobaciones. De esta forma cada cupon tiene su funcionalidad separada y de hacer falta algo comun se puede aplicar el objeto cupon para que sea heredado. Si bien en el contexto de la prueba quedan funciones pequeñas y demasiado simples.
 
-- la carpeta `src\Factory` se han colocado objetos para la creacion de los objetos cupon y producto. Esta es una forma de ahorrar codigo que usabamos para no estar siempre repitiendo el constructor en multiples partes. Ademas es mas comodo de usar en otras partes del codigo.
+## Decisiones técnicas
 
-- la carpeta `src\Rules` lo mismo que en la carpeta `src\Cupones\`, se ha construido para dividir responsabilidades y en caso de que las reglas crezcan o haya mas factores a tener en cuenta se podra añadir sin complejidades.
+- **Carpeta `datos/`**: En mi experiencia, esta carpeta no se toca, ya que refactorizamos solo una zona concreta y la información y los datos nos llegan como nos llegan. Tocar esta parte conlleva el riesgo de romper otras áreas del código en el contexto de un proyecto mayor. Por eso, durante el proceso, he decidido no modificarla, utilizando sus datos solo para las pruebas.
 
-- en el fichero `src\Cupones\ReglaCoupones.php` se ha obtado por usar un switch case. He considerado otras formas como usar arrays asociativos que ejecuten el codigo, pero me he decantado por los switch case debido a que son faciles de visualizar, y permiten ejecutar multiples fucniones o linias de codigo en el en casos particulares de complejidad, algo que al programar en codigo legado yo agradeceria.
+- **Carpeta `src/Cupones/`**: He decidido convertir los cupones en objetos hijos de la clase `Cupon`. Esta decisión se basa en mi experiencia, donde estos objetos suelen requerir procesos adicionales, como llamadas a APIs, consultas a bases de datos o comprobaciones más complejas. De esta forma, cada cupón tiene su funcionalidad separada, y si se necesita algo común, se puede aplicar herencia desde el objeto `Cupon`. Aunque en el contexto de esta prueba las funciones resultan pequeñas y simples, esta estructura permite escalabilidad.
 
-- Uso de PHPDoc. Dado que se que hay un debate en el sector con el tema de los comentarios en codigo, he obtado por usar la documentacion para explicar el codigo de est forma, ademas he tratada de seguir las indicaciones de el Clean Code y su "si hay comentarios es que el codigo no esta limipio" yo no me meto. Los comentarios que hay en el codigo son para explicar situaciones puntuales asociadas a que estoy en una prueba y para que sea mas rapido a vosotros ver lo que he hecho.
+- **Carpeta `src/Factory/`**: Aquí se han colocado objetos dedicados a la creación de instancias de `Cupon` y `Producto`. Esta aproximación permite ahorrar código, evitando repetir el constructor en múltiples lugares. Además, facilita su reutilización en otras partes del proyecto.
 
+- **Carpeta `src/Rules/`**: Al igual que en `src/Cupones/`, esta carpeta se ha creado para dividir responsabilidades. Así, si las reglas crecen o surgen nuevos factores, se podrán añadir sin complicaciones.
+
+- **Fichero `src/Cupones/ReglaCupones.php`**: En este caso, he optado por usar un `switch-case`. Aunque consideré alternativas como arrays asociativos para ejecutar código, me decanté por `switch-case` porque son fáciles de visualizar y permiten ejecutar múltiples funciones o líneas de código en casos complejos. En mi experiencia con código legado, valoro especialmente esta claridad.
+
+- **Uso de PHPDoc**: Aunque existe un debate en el sector sobre los comentarios en el código, he optado por usar PHPDoc para documentar las funciones y clases. Aunque sigo las indicaciones de *Clean Code* sobre la limpieza del código, considero que la documentación es útil para explicar decisiones puntuales, especialmente en el contexto de una prueba técnica. Los comentarios adicionales en el código están pensados para facilitar la revisión de lo realizado.
+
+**Agradezco muchisimo la oportunidad, y deseo poder trabajar pronto con ustedes, que pasen un muy ben dia!**
