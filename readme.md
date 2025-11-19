@@ -6,11 +6,14 @@ Se ha construido una refactorización siguiendo los principios de POO, SOLID y l
 ## Organización
 Primero, debo defender mi trabajo. Voy a compartir un enlace a mi repositorio, donde se podrán ver los *commits* realizados y **se podrá observar el proceso seguido de construcción y refinamiento del proyecto**. La IA solo se ha utilizado como consulta puntual para la organización y para arrancar el XAMPP.
 
+Para ejecutar la prueba solo hay que ejecutarla como un script de php normal, empezando esta por el index.php. Para el desarrollo de la prueba he usado XAMPP y Visual Studio Code.
+
 Como programador de código legado, sé lo **inútil que puede ser la IA a la hora de trabajar con código legado** y el peligro que supone para romper funcionalidades.
 
 
 [Enlace GitHub de listado de commits](https://github.com/Caradrian14/prueba_tecnica_code_legacy/commits/master/)
-[Video en Youtobe de 4 min Explicando esto yo ](https://youtu.be/L0K9Hu5BsE4) por que asumo que estaran cansados de tanto leer.
+[Enlace repositorio GitHub](https://github.com/Caradrian14/prueba_tecnica_code_legacy/)
+[Video en Youtobe de 4 minutos explicando esto yo mismo](https://youtu.be/L0K9Hu5BsE4) por que asumo que estaran cansados de tanto leer.
 
 **La estructura** la he realizado siguiendo no solo los principios **POO y SOLID**, sino que también me he inspirado en cómo trabajábamos en mi anterior puesto.
 
