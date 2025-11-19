@@ -6,7 +6,7 @@ Se ha construido una refactorización siguiendo los principios de POO, SOLID y l
 ## Organización
 Primero, debo defender mi trabajo. Voy a compartir un enlace a mi repositorio, donde se podrán ver los *commits* realizados y **se podrá observar el proceso seguido de construcción y refinamiento del proyecto**. La IA solo se ha utilizado como consulta puntual para la organización y para arrancar el XAMPP.
 
-Para ejecutar la prueba solo hay que ejecutarla como un script de php normal, empezando esta por el index.php. Para el desarrollo de la prueba he usado XAMPP y Visual Studio Code.
+Para ejecutar la prueba solo hay que ejecutarla como un script de php normal, empezando esta por el index.php. Para el desarrollo de la prueba he usado XAMPP y Visual Studio Code en un entorno de Windows 11.
 
 Como programador de código legado, sé lo **inútil que puede ser la IA a la hora de trabajar con código legado** y el peligro que supone para romper funcionalidades.
 
