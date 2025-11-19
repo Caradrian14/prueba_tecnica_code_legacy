@@ -1,5 +1,5 @@
 <?php
-namespace respuesta_herencia\src\productos;
+namespace respuesta_herencia\src\Productos;
 
 class Producto {
     public $sku;

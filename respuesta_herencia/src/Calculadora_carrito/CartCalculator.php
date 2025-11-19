@@ -1,8 +1,8 @@
 <?php
 
 namespace respuesta_herencia\src\Calculadora_carrito;
-use respuesta_herencia\src\productos\Producto;
-use respuesta_herencia\src\cupones\Cupon;
+use respuesta_herencia\src\Productos\Producto;
+use respuesta_herencia\src\Cupones\Cupon;
 use Datetime;
 use respuesta_herencia\src\Factory\ProductoFactory;
 use respuesta_herencia\src\Factory\CuponFactory;

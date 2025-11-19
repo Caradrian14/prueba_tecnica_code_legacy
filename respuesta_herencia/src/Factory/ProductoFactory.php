@@ -1,6 +1,6 @@
 <?php
 namespace respuesta_herencia\src\Factory;
-use respuesta_herencia\src\productos\Producto;
+use respuesta_herencia\src\Productos\Producto;
 
 
 class ProductoFactory {

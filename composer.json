@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "respuesta_herencia\\": "respuesta_herencia/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}

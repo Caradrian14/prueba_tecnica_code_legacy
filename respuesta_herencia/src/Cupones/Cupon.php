@@ -1,5 +1,5 @@
 <?php
-namespace respuesta_herencia\src\cupones;
+namespace respuesta_herencia\src\Cupones;
 use Datetime;
 
 class Cupon {
