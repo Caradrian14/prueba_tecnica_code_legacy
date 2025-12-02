@@ -19,13 +19,12 @@ class ReglaCupones {
         $cuponNoAcumulable = true;
         $CuponNoAcumulable = null;
         $hasCuponNoAcumulable = array_filter($coupons, function($coupon) {
-            return $coupon->isAcumulative() === false; // esto no hace return a la funcion en si solo a esa variable $hasCuponNoAcumulable
-        });      
+            return $coupon->isAcumulative() === true;
+        });
 
         if($hasCuponNoAcumulable) {
             $coupons = $hasCuponNoAcumulable;
         }
-
         foreach ($coupons as $coupon) {
             $has_a_valid_date = $coupon->is_date_valid();
             if (!$has_a_valid_date) {

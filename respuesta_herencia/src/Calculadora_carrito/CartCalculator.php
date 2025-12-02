@@ -63,8 +63,7 @@ class CartCalculator {
             $name = $item_cupon;
             $start_date = $COUPONS_DB[$name][0];
             $finish_date   = $COUPONS_DB[$name][1];
-            $acumulative = $COUPONS_DB[$name][2] ?? true;
-
+            $acumulative = $COUPONS_DB[$name][2] ?? false; 
             $items_from_coupon =["name" => $name, "start_date" => $start_date, "finish_date"=>$finish_date, "acumulative"=>$acumulative];
             
             $cupon_carrito = CuponFactory::fromArray($items_from_coupon);

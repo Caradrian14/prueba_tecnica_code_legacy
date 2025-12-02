@@ -8,7 +8,7 @@ class Cupon {
     public $finish_date;
     public $acumulative; // bool
 
-    public function __construct($name,$start_date="", $finish_date="", $acumulative = true) {
+    public function __construct($name,$start_date="", $finish_date="", $acumulative = false) {
         $this->name = $name;
         $this->start_date = $start_date;
         $this->finish_date = $finish_date;
