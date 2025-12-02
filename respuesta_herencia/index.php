@@ -42,7 +42,7 @@ $total4 = $cart_object4->start_calculator_cart();
 echo "Escenario 4 (Cupón Envío): \t" . $total4 . " (Esperado: 2.00)\n <br>";
 
 $cart5 = [['sku' => 'AGU', 'quantity' => 30]];
-$coupons5 = ['FREESHIPPING'];
+$coupons5 = ['FREESHIPPING', '2EUROS'];
 $cart_object5 = new CartCalculator($cart5, $coupons5);
 $total5 = $cart_object5->start_calculator_cart(); 
 echo "Escenario 5 (Envío Gratis > 50): \t" . $total5 . " (Esperado: 54.00)\n <br>";

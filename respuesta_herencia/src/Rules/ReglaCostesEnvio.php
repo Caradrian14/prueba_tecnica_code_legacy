@@ -17,6 +17,11 @@ class ReglaCostesEnvio {
         $has_freeshipping_coupon = false;
         if($cupones != NULL) {
             foreach ($cupones as $cupon) {
+                // hay que comprobar si hay mas cupones no acumulables
+                if ($cupon->isAcumulative() && $cupon->getName() != "FREESHIPPING") {
+                    $has_freeshipping_coupon = false;
+                    break;
+                }
                 if($cupon->getName() == "FREESHIPPING" && $cupon->is_date_valid()) {
                     $has_freeshipping_coupon = true;
                 }
