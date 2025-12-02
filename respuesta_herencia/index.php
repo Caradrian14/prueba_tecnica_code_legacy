@@ -6,15 +6,15 @@ require_once __DIR__ . '/src/Productos/Producto.php';
 require_once __DIR__ . '/src/Calculadora_carrito/CartCalculator.php';
 require_once __DIR__ . '/src/Factory/ProductoFactory.php';
 require_once __DIR__ . '/src/Factory/CuponFactory.php';
-require_once __DIR__ . '/src/Rules\ReglaBogo.php';
-require_once __DIR__ . '/src/Rules\ReglaDescuentoVolumen.php';
-require_once __DIR__ . '/src/Rules\ReglaCostesEnvio.php';
-require_once __DIR__ . '/src/Rules\ReglaCupones.php';
-require_once __DIR__ . '/src/Cupones\CuponDescuento1Euro.php';
-require_once __DIR__ . '/src/Cupones\CuponDescuento2Euro.php';
-require_once __DIR__ . '/src/Cupones\CuponDescuento10Euro.php';
-require_once __DIR__ . '/src/Cupones\CuponDescuentoBlackFriday.php';
-require_once __DIR__ . '/src/Cupones\CuponFreeShipping.php';
+require_once __DIR__ . '/src/Rules/ReglaBogo.php'; // aqui hay un error
+require_once __DIR__ . '/src/Rules/ReglaDescuentoVolumen.php';
+require_once __DIR__ . '/src/Rules/ReglaCostesEnvio.php';
+require_once __DIR__ . '/src/Rules/ReglaCupones.php';
+require_once __DIR__ . '/src/Cupones/CuponDescuento1Euro.php';
+require_once __DIR__ . '/src/Cupones/CuponDescuento2Euro.php';
+require_once __DIR__ . '/src/Cupones/CuponDescuento10Euro.php';
+require_once __DIR__ . '/src/Cupones/CuponDescuentoBlackFriday.php';
+require_once __DIR__ . '/src/Cupones/CuponFreeShipping.php';
 use respuesta_herencia\src\Calculadora_carrito\CartCalculator;
 
 $cart1 = [['sku' => 'PLT', 'quantity' => 3]];
